@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 export default function Main() {
   return (
     <View style={styles.container}>
