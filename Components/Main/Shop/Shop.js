@@ -12,12 +12,12 @@ export default function Shop({ navigation }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={{ marginTop: 25 }}
+        style={{ marginTop: 10 }}
         onPress={() => {
           navigation.openDrawer();
         }}
       >
-        <FontAwesome5 name="bars" style={{ marginLeft: 10, fontSize: 25 }} />
+        <FontAwesome5 name="bars" style={{ margin: 10, fontSize: 25 }} />
       </TouchableOpacity>
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -40,7 +40,7 @@ export default function Shop({ navigation }) {
           activeTintColor: "#f5d142",
           inactiveTintColor: "white",
           style: {
-            backgroundColor: "#4630eb", //color you want to change
+            backgroundColor: "#4630eb",
             fontSize: "8",
           },
         }}
