@@ -1,17 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-export default function Main() {
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import Shop from "./Shop/Shop";
+const Drawer = createDrawerNavigator();
+export default function Main({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text>This is Main</Text>
-    </View>
+    <Drawer.Navigator>
+      <Drawer.Screen
+        name="Shop"
+        component={Shop}
+        options={{ backgroundColor: "#4630eb" }}
+      />
+    </Drawer.Navigator>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
