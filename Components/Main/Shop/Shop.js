@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Cart from "./Cart/Cart";
@@ -8,7 +8,7 @@ import Home from "./Home/Home";
 import Header from "./Header";
 const Tab = createBottomTabNavigator();
 
-export default function Shop({ navigation }) {
+export default function Shop() {
   return (
     <View style={styles.container}>
       <Header />

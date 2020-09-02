@@ -7,7 +7,7 @@ import ChangeInfo from "./Components/ChangeInfo/ChangeInfo";
 import OrderHistory from "./Components/OrderHistory/OrderHistory";
 const Stack = createStackNavigator();
 
-export default function App({ navigation }) {
+export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
