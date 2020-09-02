@@ -5,12 +5,12 @@ import Shop from "./Shop/Shop";
 const Drawer = createDrawerNavigator();
 export default function Main({ navigation }) {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen
-        name="Shop"
-        component={Shop}
-        options={{ backgroundColor: "#4630eb" }}
-      />
+    <Drawer.Navigator
+      drawerStyle={{
+        width: 240,
+      }}
+    >
+      <Drawer.Screen name="Shop" component={Shop} />
     </Drawer.Navigator>
   );
 }

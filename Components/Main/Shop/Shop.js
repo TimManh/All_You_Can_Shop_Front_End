@@ -1,24 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Cart from "./Cart/Cart";
 import Contact from "./Contact/Contact";
 import Home from "./Home/Home";
+import Header from "./Header";
 const Tab = createBottomTabNavigator();
 
 export default function Shop({ navigation }) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={{ marginTop: 10 }}
-        onPress={() => {
-          navigation.openDrawer();
-        }}
-      >
-        <FontAwesome5 name="bars" style={{ margin: 10, fontSize: 25 }} />
-      </TouchableOpacity>
+      <Header />
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: () => {
@@ -37,11 +30,10 @@ export default function Shop({ navigation }) {
           },
         })}
         tabBarOptions={{
-          activeTintColor: "#f5d142",
-          inactiveTintColor: "white",
+          activeTintColor: "white",
+          inactiveTintColor: "black",
           style: {
-            backgroundColor: "#4630eb",
-            fontSize: "8",
+            backgroundColor: "#79b8ff",
           },
         }}
       >
@@ -55,6 +47,6 @@ export default function Shop({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#4630eb",
+    backgroundColor: "#79b8ff",
   },
 });
