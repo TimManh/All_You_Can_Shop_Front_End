@@ -2,14 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import Icon1 from "react-native-vector-icons/Feather";
-import {
-  useTheme,
-  Avatar,
-  Title,
-  Caption,
-  Paragraph,
-  Drawer,
-} from "react-native-paper";
+import { Avatar, Title, Caption, Drawer } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 export default function DrawerContent(props) {
   return (
