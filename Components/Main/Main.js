@@ -1,16 +1,22 @@
 import React from "react";
 
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createStackNavigator } from "@react-navigation/stack";
+
 import Shop from "./Shop/Shop";
-const Drawer = createDrawerNavigator();
+
+const Stack = createStackNavigator();
 export default function Main() {
   return (
-    <Drawer.Navigator
+    <Stack.Navigator
       drawerStyle={{
         width: 240,
       }}
     >
-      <Drawer.Screen name="Shop" component={Shop} />
-    </Drawer.Navigator>
+      <Stack.Screen
+        name="Shop"
+        component={Shop}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
   );
 }

@@ -1,16 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import Collection from "./Collection";
 import Category from "./Category";
 import TopProduct from "./TopProduct";
 
 export default function Home() {
   return (
-    <View style={styles.container}>
-      {/* <Collection />
-      <Category /> */}
+    <ScrollView style={styles.container}>
+      <Collection />
+      <Category />
       <TopProduct />
-    </View>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
