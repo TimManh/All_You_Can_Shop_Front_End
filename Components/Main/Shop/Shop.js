@@ -6,6 +6,7 @@ import Cart from "./Cart/Cart";
 import Contact from "./Contact/Contact";
 import Home from "./Home/Home";
 import Header from "./Header";
+import Search from "./Search/Search";
 const Tab = createBottomTabNavigator();
 
 export default function Shop() {
@@ -23,6 +24,8 @@ export default function Shop() {
               iconName = "shopping-cart";
             } else if (route.name === "Contact") {
               iconName = "portrait";
+            } else if (route.name === "Search") {
+              iconName = "search";
             }
 
             // You can return any component that you like here!
@@ -39,6 +42,7 @@ export default function Shop() {
       >
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Cart" component={Cart} />
+        <Tab.Screen name="Search" component={Search} />
         <Tab.Screen name="Contact" component={Contact} />
       </Tab.Navigator>
     </View>
