@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
 import bannerImage from "../../../../Resources/images-master/temp/banner.jpg";
 const { width, height } = Dimensions.get("window");
 
-export default function Collection() {
+export default function Category() {
   return (
     <View style={styles.wrapper}>
       <View style={{ flex: 1, justifyContent: "center" }}>
