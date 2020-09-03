@@ -23,19 +23,19 @@ export default function Contact() {
       <View style={infoContainer}>
         <View style={rowInfoContainer}>
           <Icon1 name="location" style={iconStyle} />
-          <Text style={infoText}>90 Le Thi Rieng/ Ben Thanh Dist</Text>
+          <Text style={infoText}>1 Washington Sq, San Jose, CA 95192</Text>
         </View>
         <View style={rowInfoContainer}>
           <Icon name="phone" style={iconStyle} />
-          <Text style={infoText}>(+84) 01694472176</Text>
+          <Text style={infoText}>(408) 924-1000</Text>
         </View>
         <View style={rowInfoContainer}>
           <Icon name="mail" style={iconStyle} />
-          <Text style={infoText}>khoaphamtraining@gmail.com</Text>
+          <Text style={infoText}>test@sjsu.edu</Text>
         </View>
         <View style={[rowInfoContainer, { borderBottomWidth: 0 }]}>
           <Icon name="message1" style={iconStyle} />
-          <Text style={infoText}>(+84) 09877067707</Text>
+          <Text style={infoText}>408) 924-1000</Text>
         </View>
       </View>
     </View>
