@@ -12,7 +12,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-        <Drawer.Screen name="Home" component={Main} />
+        <Drawer.Screen name="Shop" component={Main} />
         <Drawer.Screen name="Authentication" component={Authentication} />
         <Drawer.Screen name="Change Info" component={ChangeInfo} />
         <Drawer.Screen name="Order History" component={OrderHistory} />

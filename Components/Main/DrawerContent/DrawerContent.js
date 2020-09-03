@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import Icon1 from "react-native-vector-icons/Feather";
+import Icon2 from "react-native-vector-icons/Entypo";
 import { Avatar, Title, Caption, Drawer } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 export default function DrawerContent(props) {
@@ -26,11 +27,11 @@ export default function DrawerContent(props) {
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
               icon={({ color, size }) => (
-                <Icon name="home-outline" color={color} size={size} />
+                <Icon2 name="shop" color={color} size={size} />
               )}
-              label="Home"
+              label="Shop"
               onPress={() => {
-                props.navigation.navigate("Home");
+                props.navigation.navigate("Shop");
               }}
             />
             <DrawerItem

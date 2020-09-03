@@ -5,15 +5,17 @@ import {
   StyleSheet,
   Dimensions,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import Swiper from "react-native-swiper";
 import littleIcom from "../../../../Resources/images-master/temp/little.jpg";
 import maxiIcon from "../../../../Resources/images-master/temp/maxi.jpg";
 import partyIcon from "../../../../Resources/images-master/temp/party.jpg";
-
+import { useNavigation } from "@react-navigation/native";
 const { width, height } = Dimensions.get("window");
 
 export default function Category() {
+  const navigation = useNavigation();
   return (
     <View style={styles.wrapper}>
       <View style={{ flex: 1, justifyContent: "center" }}>
@@ -21,15 +23,21 @@ export default function Category() {
       </View>
       <View style={{ flex: 4 }}>
         <Swiper>
-          <ImageBackground source={littleIcom} style={styles.imageStyle}>
-            <Text style={styles.cateTitle}>Little Dress</Text>
-          </ImageBackground>
-          <ImageBackground source={maxiIcon} style={styles.imageStyle}>
-            <Text style={styles.cateTitle}>Maxi Dress</Text>
-          </ImageBackground>
-          <ImageBackground source={partyIcon} style={styles.imageStyle}>
-            <Text style={styles.cateTitle}>Party Dress</Text>
-          </ImageBackground>
+          <TouchableOpacity onPress={() => navigation.navigate("ListProduct")}>
+            <ImageBackground source={littleIcom} style={styles.imageStyle}>
+              <Text style={styles.cateTitle}>Little Dress</Text>
+            </ImageBackground>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("ListProduct")}>
+            <ImageBackground source={maxiIcon} style={styles.imageStyle}>
+              <Text style={styles.cateTitle}>Maxi Dress</Text>
+            </ImageBackground>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("ListProduct")}>
+            <ImageBackground source={partyIcon} style={styles.imageStyle}>
+              <Text style={styles.cateTitle}>Party Dress</Text>
+            </ImageBackground>
+          </TouchableOpacity>
         </Swiper>
       </View>
     </View>
