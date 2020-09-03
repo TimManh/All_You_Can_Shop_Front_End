@@ -26,28 +26,31 @@ export default function DrawerContent(props) {
           </View>
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
-              icon={({ color, size }) => (
-                <Icon2 name="shop" color={color} size={size} />
+              icon={({ size }) => (
+                <Icon2 name="shop" color="#B10D65" size={size} />
               )}
               label="Shop"
+              labelStyle={{ color: "#B10D65" }}
               onPress={() => {
                 props.navigation.navigate("Shop");
               }}
             />
             <DrawerItem
-              icon={({ color, size }) => (
-                <Icon name="account-outline" color={color} size={size} />
+              icon={({ size }) => (
+                <Icon name="account-outline" color="#B10D65" size={size} />
               )}
               label="Info"
+              labelStyle={{ color: "#B10D65" }}
               onPress={() => {
                 props.navigation.navigate("Change Info");
               }}
             />
             <DrawerItem
-              icon={({ color, size }) => (
-                <Icon1 name="shopping-bag" color={color} size={size} />
+              icon={({ size }) => (
+                <Icon1 name="shopping-bag" color="#B10D65" size={size} />
               )}
               label="Order History"
+              labelStyle={{ color: "#B10D65" }}
               onPress={() => {
                 props.navigation.navigate("Order History");
               }}
@@ -58,10 +61,11 @@ export default function DrawerContent(props) {
 
       <Drawer.Section style={styles.bottomDrawerSection}>
         <DrawerItem
-          icon={({ color, size }) => (
-            <Icon name="exit-to-app" color={color} size={size} />
+          icon={({ size }) => (
+            <Icon name="exit-to-app" color="#B10D65" size={size} />
           )}
           label="Sign Out"
+          labelStyle={{ color: "#B10D65" }}
           onPress={() => {}}
         />
       </Drawer.Section>
@@ -79,6 +83,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 3,
     fontWeight: "bold",
+    color: "#B10D65",
   },
   caption: {
     fontSize: 14,

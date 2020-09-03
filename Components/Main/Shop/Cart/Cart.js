@@ -1,16 +1,22 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-
+import { StyleSheet } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import CartView from "./CartView";
+import ProductDetail from "../ProductDetail/ProductDetail";
+const Stack = createStackNavigator();
 export default function Cart() {
   return (
-    <View style={styles.container}>
-      <Text>This is Cart</Text>
-    </View>
+    <Stack.Navigator initialRouteName="CartView">
+      <Stack.Screen
+        name="CartView"
+        component={CartView}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ProductDetail"
+        component={ProductDetail}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});

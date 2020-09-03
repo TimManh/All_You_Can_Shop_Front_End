@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import Icon from "react-native-vector-icons/AntDesign";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Cart from "./Cart/Cart";
 import Contact from "./Contact/Contact";
@@ -21,20 +21,25 @@ export default function Shop() {
             if (route.name === "Home") {
               iconName = "home";
             } else if (route.name === "Cart") {
-              iconName = "shopping-cart";
+              iconName = "shoppingcart";
             } else if (route.name === "Contact") {
-              iconName = "portrait";
+              iconName = "contacts";
             } else if (route.name === "Search") {
-              iconName = "search";
+              iconName = "search1";
             }
 
             // You can return any component that you like here!
-            return <FontAwesome5 name={iconName} style={{ fontSize: 30 }} />;
+            return (
+              <Icon
+                name={iconName}
+                style={{ fontSize: 30, color: "#B10D65" }}
+              />
+            );
           },
         })}
         tabBarOptions={{
           activeTintColor: "white",
-          inactiveTintColor: "black",
+          inactiveTintColor: "#B10D65",
           style: {
             backgroundColor: "#79b8ff",
           },
