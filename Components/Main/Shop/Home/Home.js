@@ -27,9 +27,3 @@ export default function Home() {
     </Stack.Navigator>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#DBDBD8",
-  },
-});
