@@ -14,55 +14,38 @@ import sp4 from "../../../../Resources/images-master/temp/sp4.jpeg";
 import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
-export default function TopProduct() {
+export default function TopProduct(props) {
   const navigation = useNavigation();
+  const products = props.products;
+  if (products.product === undefined) {
+    return null;
+  }
+
+  // // console.log(products.product);
   return (
     <View style={styles.container}>
       <View style={styles.titleCOntainer}>
         <Text style={styles.title}>TOP PRODUCT</Text>
       </View>
       <View style={styles.body}>
-        <TouchableOpacity
-          style={styles.productContainer}
-          onPress={() => {
-            navigation.navigate("ProductDetail");
-          }}
-        >
-          <Image source={sp1} style={styles.productImage} />
-          <Text style={styles.productName}>PRODUCT NAME</Text>
-          <Text style={styles.productPrice}>500$</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.productContainer}
-          onPress={() => {
-            navigation.navigate("ProductDetail");
-          }}
-        >
-          <Image source={sp2} style={styles.productImage} />
-          <Text style={styles.productName}>PRODUCT NAME</Text>
-          <Text style={styles.productPrice}>450$</Text>
-        </TouchableOpacity>
-        <View style={{ height: 10, width }} />
-        <TouchableOpacity
-          style={styles.productContainer}
-          onPress={() => {
-            navigation.navigate("ProductDetail");
-          }}
-        >
-          <Image source={sp3} style={styles.productImage} />
-          <Text style={styles.productName}>PRODUCT NAME</Text>
-          <Text style={styles.productPrice}>200$</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.productContainer}
-          onPress={() => {
-            navigation.navigate("ProductDetail");
-          }}
-        >
-          <Image source={sp4} style={styles.productImage} />
-          <Text style={styles.productName}>PRODUCT NAME</Text>
-          <Text style={styles.productPrice}>300$</Text>
-        </TouchableOpacity>
+        {products.product.map((e) => (
+          <TouchableOpacity
+            style={styles.productContainer}
+            onPress={() => {
+              navigation.navigate("ProductDetail");
+            }}
+            key={e.id}
+          >
+            <Image
+              source={{
+                uri: `http://10.0.0.231/api/images/product/${e.images[0]}`,
+              }}
+              style={styles.productImage}
+            />
+            <Text style={styles.productName}>{e.name.toUpperCase()}</Text>
+            <Text style={styles.productPrice}>{e.price}$</Text>
+          </TouchableOpacity>
+        ))}
       </View>
     </View>
   );

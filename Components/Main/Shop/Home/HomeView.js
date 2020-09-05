@@ -6,12 +6,14 @@ import TopProduct from "./TopProduct";
 
 export default function HomeView() {
   const [types, setTypes] = useState({});
+  const [products, setProducts] = useState({});
   useEffect(() => {
     fetch("http://10.0.0.231/api/")
       .then((res) => res.json())
       .then((resJSON) => {
-        const { type } = resJSON;
+        const { type, product } = resJSON;
         setTypes({ type });
+        setProducts({ product });
         // console.log(types);
       })
       .catch((error) => console.log(error));
@@ -21,7 +23,7 @@ export default function HomeView() {
     <ScrollView style={styles.container}>
       <Collection />
       <Category types={types} />
-      <TopProduct />
+      <TopProduct products={products} />
     </ScrollView>
   );
 }

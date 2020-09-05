@@ -34,7 +34,7 @@ export default function Category(props) {
               key={e.id}
             >
               <ImageBackground
-                source={{ uri: `http://localhost/api/images/type/${e.image}` }}
+                source={{ uri: `http://10.0.0.231/api/images/type/${e.image}` }}
                 style={styles.imageStyle}
               >
                 <Text style={styles.cateTitle}>{e.name}</Text>
