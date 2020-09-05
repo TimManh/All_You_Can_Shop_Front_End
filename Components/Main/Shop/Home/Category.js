@@ -14,30 +14,33 @@ import partyIcon from "../../../../Resources/images-master/temp/party.jpg";
 import { useNavigation } from "@react-navigation/native";
 const { width, height } = Dimensions.get("window");
 
-export default function Category() {
+export default function Category(props) {
   const navigation = useNavigation();
+  const types = props.types;
+  if (types.type === undefined) {
+    return null;
+  }
+
   return (
     <View style={styles.wrapper}>
       <View style={{ flex: 1, justifyContent: "center" }}>
         <Text style={styles.textStyle}>LIST OF CATEGORY</Text>
       </View>
       <View style={{ flex: 4 }}>
-        <Swiper>
-          <TouchableOpacity onPress={() => navigation.navigate("ListProduct")}>
-            <ImageBackground source={littleIcom} style={styles.imageStyle}>
-              <Text style={styles.cateTitle}>Little Dress</Text>
-            </ImageBackground>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("ListProduct")}>
-            <ImageBackground source={maxiIcon} style={styles.imageStyle}>
-              <Text style={styles.cateTitle}>Maxi Dress</Text>
-            </ImageBackground>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate("ListProduct")}>
-            <ImageBackground source={partyIcon} style={styles.imageStyle}>
-              <Text style={styles.cateTitle}>Party Dress</Text>
-            </ImageBackground>
-          </TouchableOpacity>
+        <Swiper showsPagination width={imageWidth} height={imageHeight}>
+          {types.type.map((e) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ListProduct")}
+              key={e.id}
+            >
+              <ImageBackground
+                source={{ uri: `http://localhost/api/images/type/${e.image}` }}
+                style={styles.imageStyle}
+              >
+                <Text style={styles.cateTitle}>{e.name}</Text>
+              </ImageBackground>
+            </TouchableOpacity>
+          ))}
         </Swiper>
       </View>
     </View>
