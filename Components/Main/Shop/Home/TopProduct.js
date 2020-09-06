@@ -7,10 +7,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import sp1 from "../../../../Resources/images-master/temp/sp1.jpeg";
-import sp2 from "../../../../Resources/images-master/temp/sp2.jpeg";
-import sp3 from "../../../../Resources/images-master/temp/sp3.jpeg";
-import sp4 from "../../../../Resources/images-master/temp/sp4.jpeg";
+
 import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
@@ -32,7 +29,7 @@ export default function TopProduct(props) {
           <TouchableOpacity
             style={styles.productContainer}
             onPress={() => {
-              navigation.navigate("ProductDetail");
+              navigation.navigate("ProductDetail", { e });
             }}
             key={e.id}
           >

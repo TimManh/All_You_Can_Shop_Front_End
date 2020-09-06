@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "New_Front_End",
-    "slug": "New_Front_End",
+    "name": "FrontEnd",
+    "slug": "FrontEnd",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

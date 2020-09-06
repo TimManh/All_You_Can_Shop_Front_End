@@ -5,19 +5,23 @@ import Category from "./Category";
 import TopProduct from "./TopProduct";
 
 export default function HomeView() {
+  const [timefetch, settimefetch] = useState(true);
   const [types, setTypes] = useState({});
   const [products, setProducts] = useState({});
   useEffect(() => {
-    fetch("http://10.0.0.231/api/")
-      .then((res) => res.json())
-      .then((resJSON) => {
-        const { type, product } = resJSON;
-        setTypes({ type });
-        setProducts({ product });
-        // console.log(types);
-      })
-      .catch((error) => console.log(error));
-    // navigation.navigate("Home", { types });
+    if (timefetch === true) {
+      fetch("http://10.0.0.231/api/")
+        .then((res) => res.json())
+        .then((resJSON) => {
+          const { type, product } = resJSON;
+          settimefetch(false);
+          setTypes({ type });
+          setProducts({ product });
+          // console.log(types);
+        })
+        .catch((error) => console.log(error));
+      // navigation.navigate("Home", { types });
+    }
   });
   return (
     <ScrollView style={styles.container}>
