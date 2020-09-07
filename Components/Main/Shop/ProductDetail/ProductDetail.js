@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -9,12 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
-import img1 from "../../../../Resources/images-master/temp/sp5.jpeg";
-import img2 from "../../../../Resources/images-master/temp/sp4.jpeg";
-
-const back = require("../../../../Resources/images-master/appIcon/back.png");
-const cart = require("../../../../Resources/images-master/appIcon/cartfull.png");
-
+import { cartArray } from "../../../CartContext";
 export default function ProductDetail({ route, navigation }) {
   const {
     wrapper,
@@ -36,7 +31,7 @@ export default function ProductDetail({ route, navigation }) {
     txtColor,
   } = styles;
   const { e } = route.params;
-
+  const { value, setValue } = useContext(cartArray);
   // console.log(e);
   return (
     <View style={wrapper}>
@@ -45,7 +40,12 @@ export default function ProductDetail({ route, navigation }) {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Icon name="arrowleft" style={backStyle} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setValue(value.concat({ e: e, quantity: 1 }));
+              navigation.navigate("Cart");
+            }}
+          >
             <Icon name="shoppingcart" style={cartStyle} />
           </TouchableOpacity>
         </View>
@@ -131,16 +131,13 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   cartStyle: {
-    width: 25,
-    height: 25,
-    fontSize: 25,
+    fontSize: 35,
     color: "#C21C70",
   },
   backStyle: {
     color: "#C21C70",
-    width: 25,
-    height: 25,
-    fontSize: 25,
+
+    fontSize: 35,
   },
   productStyle: {
     width: width / 2,
