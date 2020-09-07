@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   Dimensions,
   StyleSheet,
   Image,
+  AsyncStorage,
 } from "react-native";
 import { cartArray } from "../../../CartContext";
 function toTitleCase(str) {
@@ -17,6 +18,15 @@ function toTitleCase(str) {
 }
 export default function CartView({ navigation }) {
   const { value, setValue } = useContext(cartArray);
+  const arrTotal = value.map((temp) => temp.e.price * temp.quantity);
+  const total = arrTotal.reduce((a, b) => a + b, 0);
+  // console.log(total);
+  useEffect(() => {
+    async function saveCart(value) {
+      await AsyncStorage.setItem("@cart", JSON.stringify(value));
+    }
+    saveCart(value);
+  });
   // console.log(value);
   return (
     <View style={styles.wrapper}>
@@ -39,9 +49,11 @@ export default function CartView({ navigation }) {
                 <Text style={styles.txtName}>{toTitleCase(e.e.nameType)}</Text>
                 <TouchableOpacity
                   onPress={() => {
-                    value.pop();
-                    console.log(value);
-                    setValue(value);
+                    const newCart = value.filter(
+                      (productId) => productId.e.id !== e.e.id
+                    );
+
+                    setValue(newCart);
                   }}
                 >
                   <Text style={{ color: "#969696" }}>X</Text>
@@ -52,11 +64,40 @@ export default function CartView({ navigation }) {
               </View>
               <View style={styles.productController}>
                 <View style={styles.numberOfProduct}>
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      const newCart = value.map((productId) => {
+                        if (productId.e.id !== e.e.id) {
+                          return productId;
+                        }
+                        return {
+                          e: productId.e,
+                          quantity: productId.quantity + 1,
+                        };
+                      });
+                      setValue(newCart);
+                    }}
+                  >
                     <Text>+</Text>
                   </TouchableOpacity>
                   <Text>{e.quantity}</Text>
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      const newCart = value.map((productId) => {
+                        if (productId.e.id !== e.e.id) {
+                          return productId;
+                        }
+                        return {
+                          e: productId.e,
+                          quantity:
+                            productId.quantity <= 1
+                              ? 1
+                              : productId.quantity - 1,
+                        };
+                      });
+                      setValue(newCart);
+                    }}
+                  >
                     <Text>-</Text>
                   </TouchableOpacity>
                 </View>
@@ -74,7 +115,7 @@ export default function CartView({ navigation }) {
         ))}
       </ScrollView>
       <TouchableOpacity style={styles.checkoutButton}>
-        <Text style={styles.checkoutTitle}>TOTAL {1000}$ CHECKOUT NOW</Text>
+        <Text style={styles.checkoutTitle}>TOTAL {total}$ CHECKOUT NOW</Text>
       </TouchableOpacity>
     </View>
   );

@@ -12,7 +12,7 @@ const Tab = createBottomTabNavigator();
 
 export default function Shop() {
   const [value, setValue] = useState([]);
-
+  // global.incrQuantity()
   return (
     <View style={styles.container}>
       <Header />

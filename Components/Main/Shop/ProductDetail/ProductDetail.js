@@ -13,12 +13,6 @@ import Icon from "react-native-vector-icons/AntDesign";
 import { cartArray } from "../../../CartContext";
 
 export default function ProductDetail({ route, navigation }) {
-  useEffect(() => {
-    async function saveCart(value) {
-      await AsyncStorage.setItem("@cart", JSON.stringify(value));
-    }
-    saveCart(value);
-  });
   const {
     wrapper,
     cardStyle,
