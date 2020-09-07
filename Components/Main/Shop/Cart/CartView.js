@@ -37,7 +37,13 @@ export default function CartView({ navigation }) {
                 }}
               >
                 <Text style={styles.txtName}>{toTitleCase(e.e.nameType)}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    value.pop();
+                    console.log(value);
+                    setValue(value);
+                  }}
+                >
                   <Text style={{ color: "#969696" }}>X</Text>
                 </TouchableOpacity>
               </View>

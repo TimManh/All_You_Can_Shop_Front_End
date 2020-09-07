@@ -5,21 +5,29 @@ import {
   RefreshControl,
   AsyncStorage,
 } from "react-native";
-import { cartArray } from "../../../CartContext";
 
 import Collection from "./Collection";
 import Category from "./Category";
 import TopProduct from "./TopProduct";
+import { cartArray } from "../../../CartContext";
 const wait = (timeout) => {
   return new Promise((resolve) => {
     setTimeout(resolve, timeout);
   });
 };
-
-// const getCart = async () => {
-//   const newCart = AsyncStorage.getItem("@cart");
-//   return newCart;
-// };
+const getCart = async () => {
+  try {
+    const item = await AsyncStorage.getItem("@cart");
+    // console.log(value);
+    if (item !== null) {
+      return JSON.parse(item);
+    }
+    return [];
+  } catch (error) {
+    // Error retrieving data
+    console.log(error);
+  }
+};
 
 export default function HomeView() {
   const [timefetch, settimefetch] = useState(true);
@@ -46,6 +54,7 @@ export default function HomeView() {
           // console.log(types);
         })
         .catch((error) => console.log(error));
+      getCart().then((item) => setValue(item));
       // navigation.navigate("Home", { types });
     }
   });

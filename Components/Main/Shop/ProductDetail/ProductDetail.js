@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,10 +7,18 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
+  AsyncStorage,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { cartArray } from "../../../CartContext";
+
 export default function ProductDetail({ route, navigation }) {
+  useEffect(() => {
+    async function saveCart(value) {
+      await AsyncStorage.setItem("@cart", JSON.stringify(value));
+    }
+    saveCart(value);
+  });
   const {
     wrapper,
     cardStyle,
