@@ -1,19 +1,22 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   View,
   Text,
   TouchableOpacity,
   TextInput,
   StyleSheet,
+  AsyncStorage,
 } from "react-native";
 import { setSignIn } from "../Main/global";
 import { useNavigation } from "@react-navigation/native";
+
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { inputStyle, bigButton, buttonText } = styles;
   const { user, setUser } = useContext(setSignIn);
   const navigation = useNavigation();
+
   const onSignIn = () => {
     fetch("http://10.0.0.231/api/login.php", {
       method: "POST",
@@ -28,6 +31,8 @@ export default function SignIn() {
       })
       .then((resJson) => {
         setUser(resJson);
+        AsyncStorage.setItem("@token", JSON.stringify(user.token));
+
         navigation.navigate("Shop");
       })
       .catch((err) => err);

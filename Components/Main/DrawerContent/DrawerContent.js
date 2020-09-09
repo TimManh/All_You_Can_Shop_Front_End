@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, AsyncStorage } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import Icon1 from "react-native-vector-icons/Feather";
 import Icon2 from "react-native-vector-icons/Entypo";
@@ -98,6 +98,7 @@ export default function DrawerContent(props) {
             labelStyle={{ color: "#B10D65" }}
             onPress={() => {
               setUser(null);
+              AsyncStorage.setItem("@token", "");
             }}
           />
         </Drawer.Section>

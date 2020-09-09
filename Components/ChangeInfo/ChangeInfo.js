@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   TouchableOpacity,
@@ -6,13 +6,16 @@ import {
   Image,
   StyleSheet,
   TextInput,
+  Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
+import { setSignIn } from "../Main/global";
 
 export default function ChangeInfo({ navigation }) {
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState();
+  const { user, setUser } = useContext(setSignIn);
+  const [name, setName] = useState(user.user.name);
+  const [address, setAddress] = useState(user.user.address);
+  const [phone, setPhone] = useState(user.user.phone);
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
@@ -35,27 +38,50 @@ export default function ChangeInfo({ navigation }) {
           placeholder="Enter your name"
           autoCapitalize="none"
           value={name}
-          onChangeText={(txtName) => this.setState({ ...this.state, txtName })}
+          onChangeText={(txtName) => setName(txtName)}
         />
         <TextInput
           style={styles.textInput}
           placeholder="Enter your address"
           autoCapitalize="none"
           value={address}
-          onChangeText={(txtAddress) =>
-            this.setState({ ...this.state, txtAddress })
-          }
+          onChangeText={(txtAddress) => setAddress(txtAddress)}
         />
         <TextInput
           style={styles.textInput}
           placeholder="Enter your phone number"
           autoCapitalize="none"
           value={phone}
-          onChangeText={(txtPhone) =>
-            this.setState({ ...this.state, txtPhone })
-          }
+          onChangeText={(txtPhone) => setPhone(txtPhone)}
         />
-        <TouchableOpacity style={styles.signInContainer}>
+        <TouchableOpacity
+          style={styles.signInContainer}
+          onPress={() => {
+            fetch("http://10.0.0.231/api/change_info.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: JSON.stringify({
+                token: user.token,
+                name: name,
+                address: address,
+                phone: phone,
+              }),
+            })
+              .then((res) => res.json())
+              .then((resJSON) =>
+                Alert.alert(
+                  "Notice",
+                  "Info Updated ",
+                  [{ text: "OK", onPress: () => navigation.navigate("Shop") }],
+                  { cancelable: false }
+                )
+              )
+              .catch((err) => console.log(err));
+          }}
+        >
           <Text style={styles.signInTextStyle}>CHANGE YOUR INFOMATION</Text>
         </TouchableOpacity>
       </View>
