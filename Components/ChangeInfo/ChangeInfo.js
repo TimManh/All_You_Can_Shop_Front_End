@@ -13,9 +13,9 @@ import { setSignIn } from "../Main/global";
 
 export default function ChangeInfo({ navigation }) {
   const { user, setUser } = useContext(setSignIn);
-  const [name, setName] = useState(user.user.name);
-  const [address, setAddress] = useState(user.user.address);
-  const [phone, setPhone] = useState(user.user.phone);
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
   return (
     <View style={styles.wrapper}>
       <View style={styles.header}>
