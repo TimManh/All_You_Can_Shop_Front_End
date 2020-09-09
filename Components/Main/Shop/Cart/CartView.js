@@ -20,14 +20,12 @@ export default function CartView({ navigation }) {
   const { value, setValue } = useContext(cartArray);
   const arrTotal = value.map((temp) => temp.e.price * temp.quantity);
   const total = arrTotal.reduce((a, b) => a + b, 0);
-  // console.log(total);
   useEffect(() => {
     async function saveCart(value) {
       await AsyncStorage.setItem("@cart", JSON.stringify(value));
     }
     saveCart(value);
   });
-  // console.log(value);
   return (
     <View style={styles.wrapper}>
       <ScrollView style={styles.main}>

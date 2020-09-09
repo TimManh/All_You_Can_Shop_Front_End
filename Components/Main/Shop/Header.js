@@ -33,19 +33,13 @@ export default function Header() {
             color: "#B10D65",
           }}
         >
-          All You Can Shop
+          ALL YOU CAN SHOP
         </Text>
-        <TouchableOpacity
-          style={{ marginTop: 10 }}
-          onPress={() => {
-            console.log("clicked");
-          }}
-        >
-          <FontAwesome5
-            name="female"
-            style={{ marginTop: 10, fontSize: 30, color: "#B10D65" }}
-          />
-        </TouchableOpacity>
+
+        <FontAwesome5
+          name="female"
+          style={{ marginTop: 20, fontSize: 30, color: "#B10D65" }}
+        />
       </View>
       <TextInput
         style={{

@@ -34,7 +34,6 @@ export default function ProductDetail({ route, navigation }) {
   } = styles;
   const { e } = route.params;
   const { value, setValue } = useContext(cartArray);
-  // console.log(e);
   return (
     <View style={wrapper}>
       <View style={cardStyle}>

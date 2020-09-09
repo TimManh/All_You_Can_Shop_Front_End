@@ -18,7 +18,6 @@ const wait = (timeout) => {
 const getCart = async () => {
   try {
     const item = await AsyncStorage.getItem("@cart");
-    // console.log(value);
     if (item !== null) {
       return JSON.parse(item);
     }

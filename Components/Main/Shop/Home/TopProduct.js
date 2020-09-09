@@ -18,7 +18,6 @@ export default function TopProduct(props) {
     return null;
   }
 
-  // // console.log(products.product);
   return (
     <View style={styles.container}>
       <View style={styles.titleCOntainer}>
