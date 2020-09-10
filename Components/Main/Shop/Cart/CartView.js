@@ -16,6 +16,63 @@ function toTitleCase(str) {
     (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
   );
 }
+const getToken = async () => {
+  try {
+    const item = await AsyncStorage.getItem("@token");
+    if (item !== null) {
+      // console.log(item);
+      return JSON.parse(item);
+    }
+    return "";
+  } catch (error) {
+    // Error retrieving data
+    console.log(error);
+  }
+};
+// useEffect(() => {
+//   const getToken = async () => {
+//     try {
+//       const item = await AsyncStorage.getItem("@token");
+//       if (item !== null) {
+//         // console.log(item);
+//         return JSON.parse(item);
+//       }
+//       return "";
+//     } catch (error) {
+//       // Error retrieving data
+//       console.log(error);
+//     }
+//   };
+//   getToken().then((token) => {
+//     // console.log(token);
+//     if (token !== "") {
+//       fetch("http://10.0.0.231/api/check_login.php", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Accept: "application/json",
+//         },
+//         body: JSON.stringify({ token: token }),
+//       })
+//         .then((res) => res.json())
+//         .then((resJson) => setUser(resJson))
+//         .catch((err) => console.log(err));
+//     }
+//   });
+// });
+// try {
+//   fetch("http://10.0.0.231/api/login.php", {
+//     method: 'POST',
+//     headers{
+//       'Content-Type': 'application/json',
+//       Accept:'application/json'
+//   },
+//     body: JSON.stringify({token, arrayDetail})
+//   }).then(res=>res.json())
+
+// } catch (error) {
+
+// }
 export default function CartView({ navigation }) {
   const { value, setValue } = useContext(cartArray);
 
@@ -28,6 +85,26 @@ export default function CartView({ navigation }) {
     }
     saveCart(value);
   });
+  const onSendOrder = async () => {
+    try {
+      const token = await getToken();
+      // console.log(token);
+      const arrayDetail = value.map((e) => ({
+        id: e.e.id,
+        quantity: e.quantity,
+      }));
+      fetch("http://10.0.0.231/api/cart.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ token: token, arrayDetail: arrayDetail }),
+      }).then((res) => res.text());
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <View style={styles.wrapper}>
       <ScrollView style={styles.main}>
@@ -114,7 +191,10 @@ export default function CartView({ navigation }) {
           </View>
         ))}
       </ScrollView>
-      <TouchableOpacity style={styles.checkoutButton}>
+      <TouchableOpacity
+        style={styles.checkoutButton}
+        onPress={() => onSendOrder()}
+      >
         <Text style={styles.checkoutTitle}>TOTAL {total}$ CHECKOUT NOW</Text>
       </TouchableOpacity>
     </View>
