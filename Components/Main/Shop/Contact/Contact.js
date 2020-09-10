@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import map from "../../../../Resources/images-master/appIcon/map.png";
 import Icon1 from "react-native-vector-icons/EvilIcons";
 import Icon from "react-native-vector-icons/AntDesign";
+import MapView, { Marker } from "react-native-maps";
 export default function Contact() {
   const {
     mapContainer,
@@ -15,10 +16,21 @@ export default function Contact() {
   return (
     <View style={wrapper}>
       <View style={mapContainer}>
-        <Image
-          style={{ flex: 1, alignSelf: "stretch", width: undefined }}
-          source={map}
-        />
+        <MapView
+          style={{ width: width - 20, height: 275 }}
+          initialRegion={{
+            latitude: 37.3347,
+            longitude: -121.8753,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        >
+          <Marker
+            coordinate={{ latitude: 37.3347, longitude: -121.8753 }}
+            title="San Jose State University"
+            description="This is Home"
+          />
+        </MapView>
       </View>
       <View style={infoContainer}>
         <View style={rowInfoContainer}>
