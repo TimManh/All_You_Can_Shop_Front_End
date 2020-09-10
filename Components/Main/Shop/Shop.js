@@ -55,7 +55,11 @@ export default function Shop() {
             component={Cart}
             options={{ tabBarBadge: value.length === 0 ? null : value.length }}
           />
-          <Tab.Screen name="Search" component={Search} />
+          <Tab.Screen
+            name="Search"
+            component={Search}
+            initialParams={{ test: null }}
+          />
           <Tab.Screen name="Contact" component={Contact} />
         </Tab.Navigator>
       </cartArray.Provider>

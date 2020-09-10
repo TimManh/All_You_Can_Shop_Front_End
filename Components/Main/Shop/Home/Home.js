@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeView from "./HomeView";
 import ProductDetail from "../ProductDetail/ProductDetail";
 import ListProduct from "../ListProduct/ListProduct";
+import Category from "./Category";
 const Stack = createStackNavigator();
 export default function Home() {
   return (

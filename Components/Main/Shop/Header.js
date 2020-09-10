@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text } from "react-native";
 import { TouchableOpacity, TextInput } from "react-native-gesture-handler";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function Header() {
   const navigation = useNavigation();
+  const [txtSearch, setTxtSearch] = useState("");
   return (
     <View style={{ padding: 10 }}>
       <View
@@ -49,6 +50,18 @@ export default function Header() {
           paddingLeft: 10,
         }}
         placeholder="Find products"
+        onChangeText={(text) => setTxtSearch(text)}
+        onSubmitEditing={() => {
+          fetch(`http://10.0.0.231/api/search.php?key=${txtSearch}`)
+            .then((res) => res.json())
+            .then((arrProduct) => {
+              navigation.navigate("Search", {
+                screen: "SearchView",
+                params: { test: arrProduct },
+              });
+            })
+            .catch((err) => console.log(err));
+        }}
       />
     </View>
   );

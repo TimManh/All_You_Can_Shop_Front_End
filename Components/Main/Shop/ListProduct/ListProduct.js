@@ -1,119 +1,110 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Image,
   View,
   Text,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
+  RefreshControl,
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
-import sp1 from "../../../../Resources/images-master/temp/sp1.jpeg";
-import sp2 from "../../../../Resources/images-master/temp/sp2.jpeg";
 
-import sp3 from "../../../../Resources/images-master/temp/sp3.jpeg";
+import { FlatList } from "react-native-gesture-handler";
 
-export default function ListProduct({ navigation }) {
+export default function ListProduct({ navigation, route }) {
+  const { e } = route.params;
+  const [refreshing, setRefreshing] = useState(false);
+  const [productList, setProductList] = useState([]);
+  const [page, setPage] = useState(1);
+  const [itemId, setItemId] = useState(e);
+  useEffect(() => {
+    fetch(
+      `http://10.0.0.231/api/product_by_type.php?id_type=${e.id}&page=${page}`
+    )
+      .then((res) => res.json())
+      .then((resJSON) => {
+        setProductList(resJSON);
+      })
+      .catch((err) => console.log(err));
+  });
   return (
     <View style={styles.container}>
-      {/* <TouchableOpacity
-        onPress={() => {
-          navigation.goBack();
+      <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}
+        >
+          <Icon name="arrowleft" style={{ fontSize: 30, color: "#B10D65" }} />
+        </TouchableOpacity>
+        <Text style={styles.titleStyle}>{e.name}</Text>
+        <View style={{ width: 30 }} />
+      </View>
+      <FlatList
+        data={productList}
+        renderItem={({ item }) => (
+          <View style={styles.productContainer}>
+            <Image
+              style={styles.productImage}
+              source={{
+                uri: `http://10.0.0.231/api/images/product/${item.images[0]}`,
+              }}
+            />
+            <View style={styles.productInfo}>
+              <Text style={styles.txtName}>{item.name}</Text>
+              <Text style={styles.txtPrice}>{item.price}$</Text>
+              <Text style={styles.txtMaterial}>{item.material}</Text>
+              <View style={styles.lastRowInfo}>
+                <Text style={styles.txtColor}>{item.color}</Text>
+                <View
+                  style={{
+                    backgroundColor: item.color.toLowerCase(),
+                    height: 16,
+                    width: 16,
+                    borderRadius: 8,
+                  }}
+                />
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("ProductDetail", { e: item });
+                  }}
+                >
+                  <Text style={styles.txtShowDetail}>SHOW DETAILS</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        )}
+        keyExtractor={(item) => {
+          setItemId(item.id_type);
+          return item.id;
         }}
-      >
-        <Icon name="arrowleft" style={{ fontSize: 35 }} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate("ProductDetail");
-        }}
-      >
-        <Icon name="arrowright" style={{ fontSize: 35 }} />
-      </TouchableOpacity> */}
-      <ScrollView style={styles.wrapper}>
-        <View style={styles.header}>
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              setRefreshing(true);
+
+              setPage(page + 1);
+              const idType = itemId;
+              console.log(itemId);
+              fetch(
+                `http://10.0.0.231/api/product_by_type.php?id_type=${idType}&page=${page}`
+              )
+                .then((res) => res.json())
+                .then((resJSON) => {
+                  setProductList(resJSON);
+                  setRefreshing(false);
+                });
             }}
-          >
-            <Icon name="arrowleft" style={{ fontSize: 30, color: "#B10D65" }} />
-          </TouchableOpacity>
-          <Text style={styles.titleStyle}>Party Dress</Text>
-          <View style={{ width: 30 }} />
-        </View>
-        <View style={styles.productContainer}>
-          <Image style={styles.productImage} source={sp1} />
-          <View style={styles.productInfo}>
-            <Text style={styles.txtName}>Lace Sleeve Si</Text>
-            <Text style={styles.txtPrice}>117$</Text>
-            <Text style={styles.txtMaterial}>Material silk</Text>
-            <View style={styles.lastRowInfo}>
-              <Text style={styles.txtColor}>Color RoyalBlue</Text>
-              <View
-                style={{
-                  backgroundColor: "#4169e1",
-                  height: 16,
-                  width: 16,
-                  borderRadius: 8,
-                }}
-              />
-              <TouchableOpacity>
-                <Text style={styles.txtShowDetail}>SHOW DETAILS</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <View style={styles.productContainer}>
-          <Image style={styles.productImage} source={sp2} />
-          <View style={styles.productInfo}>
-            <Text style={styles.txtName}>Lace Sleeve Si</Text>
-            <Text style={styles.txtPrice}>117$</Text>
-            <Text style={styles.txtMaterial}>Material silk</Text>
-            <View style={styles.lastRowInfo}>
-              <Text style={styles.txtColor}>Color RoyalBlue</Text>
-              <View
-                style={{
-                  backgroundColor: "#4169e1",
-                  height: 16,
-                  width: 16,
-                  borderRadius: 8,
-                }}
-              />
-              <TouchableOpacity>
-                <Text style={styles.txtShowDetail}>SHOW DETAILS</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <View style={styles.productContainer}>
-          <Image style={styles.productImage} source={sp3} />
-          <View style={styles.productInfo}>
-            <Text style={styles.txtName}>Lace Sleeve Si</Text>
-            <Text style={styles.txtPrice}>117$</Text>
-            <Text style={styles.txtMaterial}>Material silk</Text>
-            <View style={styles.lastRowInfo}>
-              <Text style={styles.txtColor}>Color RoyalBlue</Text>
-              <View
-                style={{
-                  backgroundColor: "#4169e1",
-                  height: 16,
-                  width: 16,
-                  borderRadius: 8,
-                }}
-              />
-              <TouchableOpacity>
-                <Text style={styles.txtShowDetail}>SHOW DETAILS</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </ScrollView>
+          />
+        }
+      />
     </View>
   );
 }
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#DBDBD8", padding: 10 },
+  container: { flex: 1, backgroundColor: "#FFF", padding: 10 },
   header: {
     height: 50,
     flexDirection: "row",
@@ -139,9 +130,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  txtColor: {},
   txtName: { color: "#BCBCBC", fontSize: 20, fontWeight: "400" },
-  txtMaterial: {},
   txtPrice: { color: "#B10D65" },
   txtShowDetail: { color: "#B10D65", fontSize: 11 },
 });

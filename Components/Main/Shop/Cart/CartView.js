@@ -44,7 +44,7 @@ export default function CartView({ navigation }) {
                   flexDirection: "row",
                 }}
               >
-                <Text style={styles.txtName}>{toTitleCase(e.e.nameType)}</Text>
+                <Text style={styles.txtName}>{toTitleCase(e.e.name)}</Text>
                 <TouchableOpacity
                   onPress={() => {
                     const newCart = value.filter(

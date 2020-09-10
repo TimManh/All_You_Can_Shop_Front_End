@@ -11,6 +11,7 @@ export default function Search() {
         name="SearchView"
         component={SearchView}
         options={{ headerShown: false }}
+        initialParams={{ test: null }}
       />
       <Stack.Screen
         name="ProductDetail"

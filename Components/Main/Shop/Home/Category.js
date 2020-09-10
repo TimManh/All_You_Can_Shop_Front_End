@@ -8,9 +8,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Swiper from "react-native-swiper";
-import littleIcom from "../../../../Resources/images-master/temp/little.jpg";
-import maxiIcon from "../../../../Resources/images-master/temp/maxi.jpg";
-import partyIcon from "../../../../Resources/images-master/temp/party.jpg";
 import { useNavigation } from "@react-navigation/native";
 const { width, height } = Dimensions.get("window");
 
@@ -30,7 +27,7 @@ export default function Category(props) {
         <Swiper showsPagination width={imageWidth} height={imageHeight}>
           {types.type.map((e) => (
             <TouchableOpacity
-              onPress={() => navigation.navigate("ListProduct")}
+              onPress={() => navigation.navigate("ListProduct", { e: e })}
               key={e.id}
             >
               <ImageBackground

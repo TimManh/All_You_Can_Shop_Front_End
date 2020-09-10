@@ -10,13 +10,14 @@ import {
 } from "react-native";
 import sp1 from "../../../../Resources/images-master/temp/sp1.jpeg";
 import sp4 from "../../../../Resources/images-master/temp/sp4.jpeg";
+import { FlatList } from "react-native-gesture-handler";
 function toTitleCase(str) {
   return str.replace(
     /\w\S*/g,
     (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
   );
 }
-export default function SearchView({ navigation }) {
+export default function SearchView({ route, navigation }) {
   const {
     product,
     mainRight,
@@ -29,58 +30,50 @@ export default function SearchView({ navigation }) {
     showDetailContainer,
     wrapper,
   } = styles;
+  const { test } = route.params;
+  if (test === null) {
+    return null;
+  }
+  // console.log(test);
   return (
-    <ScrollView style={wrapper}>
-      <View style={product}>
-        <Image source={sp1} style={productImage} />
-        <View style={mainRight}>
-          <Text style={txtName}>{toTitleCase("black dress")}</Text>
-          <Text style={txtPrice}>100$</Text>
-          <Text style={txtMaterial}>Material Fur</Text>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={txtColor}>Color white</Text>
-            <View
-              style={{
-                height: 15,
-                width: 15,
-                backgroundColor: "white",
-                borderRadius: 15,
-                marginLeft: 10,
-              }}
-            />
-          </View>
-          <TouchableOpacity style={showDetailContainer}>
-            <Text style={txtShowDetail}>SHOW DETAILS</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={product}>
-        <Image source={sp4} style={productImage} />
-        <View style={mainRight}>
-          <Text style={txtName}>{toTitleCase("black dress")}</Text>
-          <Text style={txtPrice}>100$</Text>
-          <Text style={txtMaterial}>Material Fur</Text>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={txtColor}>Color white</Text>
+    <FlatList
+      data={test}
+      renderItem={({ item }) => (
+        <View style={product}>
+          <Image
+            source={{
+              uri: `http://10.0.0.231/api/images/product/${item.images[0]}`,
+            }}
+            style={productImage}
+          />
+          <View style={mainRight} key={item.id_type}>
+            <Text style={txtName}>{toTitleCase(item.name)}</Text>
+            <Text style={txtPrice}>{item.price}$</Text>
+            <Text style={txtMaterial}>Material {item.material}</Text>
             <View style={{ flexDirection: "row" }}>
-              <Text style={txtColor}>Color white</Text>
+              <Text style={txtColor}>Color {item.color}</Text>
               <View
                 style={{
                   height: 15,
                   width: 15,
-                  backgroundColor: "white",
+                  backgroundColor: item.color.toLowerCase(),
                   borderRadius: 15,
                   marginLeft: 10,
                 }}
               />
             </View>
+            <TouchableOpacity
+              style={showDetailContainer}
+              onPress={() => {
+                navigation.navigate("ProductDetail", { e: item });
+              }}
+            >
+              <Text style={txtShowDetail}>SHOW DETAILS</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={showDetailContainer}>
-            <Text style={txtShowDetail}>SHOW DETAILS</Text>
-          </TouchableOpacity>
         </View>
-      </View>
-    </ScrollView>
+      )}
+    />
   );
 }
 
