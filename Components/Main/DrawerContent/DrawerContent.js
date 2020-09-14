@@ -98,6 +98,7 @@ export default function DrawerContent(props) {
             labelStyle={{ color: "#B10D65" }}
             onPress={() => {
               setUser(null);
+
               AsyncStorage.setItem("@token", "");
             }}
           />

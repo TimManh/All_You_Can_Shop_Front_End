@@ -31,6 +31,7 @@ export default function SignIn() {
       })
       .then((resJson) => {
         setUser(resJson);
+
         AsyncStorage.setItem("@token", JSON.stringify(user.token));
 
         navigation.navigate("Shop");
